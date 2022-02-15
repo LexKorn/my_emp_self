@@ -11,12 +11,12 @@ const AppFilter = () => {
             <button
                 className="btn btn-outline-light"
                 type="button">
-                    Will get cookies
+                    to increase
             </button>
             <button
                 className="btn btn-outline-light"
                 type="button">
-                    Salary more than 3000$
+                    Salary more than 1000$
             </button>
         </div>
     )
