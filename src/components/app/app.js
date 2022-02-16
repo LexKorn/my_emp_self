@@ -13,9 +13,9 @@ class App extends Component {
     super(props);
     this.state = {
       db: [
-        {name: 'Ivan Ivanov', salary: 800, increase: false, like: false, id:1},
-        {name: 'Jonh Smith', salary: 1500, increase: false, like: false, id:2},
-        {name: 'Petr Petrov', salary: 2500, increase: true, like: false, id:3}
+        {name: 'Ivan Ivanov', salary: 800, increase: false, rise: true, id:1},
+        {name: 'Jonh Smith', salary: 1500, increase: false, rise: false, id:2},
+        {name: 'Petr Petrov', salary: 2500, increase: true, rise: false, id:3}
       ]
     }
     this.maxId = 4
@@ -34,24 +34,61 @@ class App extends Component {
       name,
       salary,
       increase: false,
-      like: false,
+      rise: false,    
       id: this.maxId++
     }
 
     this.setState(({db}) => {
       const newArr = db.concat(newItem);
-      // const newArr = [...db, newItem];
       return {
         db: newArr
       }
     })
   }
 
+  /*
+  onToggleIncrease = (id) => {
+    // this.setState(({db}) => {
+    //   const index = db.findIndex(elem => elem.id === id),
+    //         old = db[index],
+    //         newItem = {...old, increase: !old.increase},
+    //         newArr = [...db.slice(0, index), newItem, ...db.slice(index + 1)];
+
+    //   return {
+    //     db: newArr
+    //   }
+    // })
+
+    this.setState(({db}) => ({
+      db: db.map(item => {
+        if (item.id === id) {
+          return {...item, increase: !item.increase};
+        }
+        return item;
+      })
+    }))
+  }
+  */
+
+  onToggleProp = (id, prop) => {
+    this.setState(({db}) => ({
+      db: db.map(item => {
+        if (item.id === id) {
+          return {...item, [prop]: !item[prop]};
+        }
+        return item;
+      })
+    }))
+  }
+
 
   render() {
+    const employees = this.state.db.length,
+          increased = this.state.db.filter(item => item.increase).length;
+
     return (
       <div className="app">
-        <AppInfo/>
+        <AppInfo employees={employees} increased={increased}/>
   
         <div className="search-panel">
           <SearchPanel/>
@@ -60,7 +97,8 @@ class App extends Component {
   
         <EmployeesList 
           data={this.state.db}
-          onDelete={this.deleteItem}/>
+          onDelete={this.deleteItem}
+          onToggleProp={this.onToggleProp}/>
         <EmployeesAddForm onAdd={this.addItem}/>
       </div>
     );
