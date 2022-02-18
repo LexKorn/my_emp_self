@@ -16,7 +16,9 @@ class App extends Component {
         {name: 'Ivan Ivanov', salary: 800, increase: false, rise: true, id:1},
         {name: 'Jonh Smith', salary: 1500, increase: false, rise: false, id:2},
         {name: 'Petr Petrov', salary: 2500, increase: true, rise: false, id:3}
-      ]
+      ],
+      term: '',
+      filter: 'all'
     }
     this.maxId = 4
   }
@@ -46,30 +48,6 @@ class App extends Component {
     })
   }
 
-  /*
-  onToggleIncrease = (id) => {
-    // this.setState(({db}) => {
-    //   const index = db.findIndex(elem => elem.id === id),
-    //         old = db[index],
-    //         newItem = {...old, increase: !old.increase},
-    //         newArr = [...db.slice(0, index), newItem, ...db.slice(index + 1)];
-
-    //   return {
-    //     db: newArr
-    //   }
-    // })
-
-    this.setState(({db}) => ({
-      db: db.map(item => {
-        if (item.id === id) {
-          return {...item, increase: !item.increase};
-        }
-        return item;
-      })
-    }))
-  }
-  */
-
   onToggleProp = (id, prop) => {
     this.setState(({db}) => ({
       db: db.map(item => {
@@ -81,22 +59,57 @@ class App extends Component {
     }))
   }
 
+  searchEmp = (items, term) => {
+      if (term.length === 0) {
+        return items
+      } else {
+        return items.filter(item => {
+          return item.name.indexOf(term) > -1;          
+        });     
+      }   
+  }
+
+  onUpdateSearch = (term) => {
+    this.setState({term: term});  // более краткая запись ({term})
+  }
+
+  filterPost = (items, filter) => {
+    switch(filter) {
+      case 'rise': 
+        return items.filter(item => item.rise);
+      case 'moreThan1000': 
+        return items.filter(item => item.salary > 1000);
+      default: 
+        return items;
+    }
+  }
+
+  onFilterSelect = (filter) => {     
+    this.setState ({     
+      filter: filter   // более краткая запись  this.setState ({filter})
+    })
+  }
+
 
   render() {
     const employees = this.state.db.length,
-          increased = this.state.db.filter(item => item.increase).length;
+          increased = this.state.db.filter(item => item.increase).length,
+          {db, term, filter} = this.state,
+          visibleDB = this.filterPost(this.searchEmp(db, term), filter);
 
     return (
       <div className="app">
         <AppInfo employees={employees} increased={increased}/>
   
         <div className="search-panel">
-          <SearchPanel/>
-          <AppFilter/>
+          <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
+          <AppFilter 
+            onFilterSelect={this.onFilterSelect}
+            filter={filter}/>
         </div>
   
         <EmployeesList 
-          data={this.state.db}
+          data={visibleDB}
           onDelete={this.deleteItem}
           onToggleProp={this.onToggleProp}/>
         <EmployeesAddForm onAdd={this.addItem}/>
