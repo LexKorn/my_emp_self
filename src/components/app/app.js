@@ -108,11 +108,11 @@ class App extends Component {
             filter={filter}/>
         </div>
   
-        <EmployeesList 
+        {/* <EmployeesList 
           data={visibleDB}
           onDelete={this.deleteItem}
-          onToggleProp={this.onToggleProp}/>
-        <EmployeesAddForm onAdd={this.addItem}/>
+          onToggleProp={this.onToggleProp}/> */}
+        {/* <EmployeesAddForm onAdd={this.addItem}/> */}
       </div>
     );
   }  

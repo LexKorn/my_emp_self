@@ -1,6 +1,7 @@
 import {Component} from 'react';
 
-import './employees-add-form.css';
+// import './employees-add-form.css';
+import './employees-add-form.scss';
 
 class EmployeesAddForm extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class EmployeesAddForm extends Component {
         const {name, salary} = this.state;
 
         if (name === '' || name.length < 3 || salary === '' || salary.length < 3 ) {
-            alert('Wrong input! Try again!')
+            alert('Неверный ввод данных. Повторите попытку.')
         } else {
             this.props.onAdd(name, salary);
             this.setState({
@@ -39,14 +40,14 @@ class EmployeesAddForm extends Component {
 
         return (
             <div className="app-add-form">
-                <h3>Add a new employee</h3>
+                <h3>Добавьте нового сотрудника</h3>
                 <form 
                     className="add-form d-flex"
                     onSubmit={this.onSubmit}>
                     <input 
                         type="text"
                         className="form-control new-post-label"
-                        placeholder="Enter employee" 
+                        placeholder="Как его зовут?" 
                         name='name'
                         value={name}
                         onChange={this.onValueChange}
@@ -54,13 +55,13 @@ class EmployeesAddForm extends Component {
                     <input 
                         type="number"
                         className="form-control new-post-label"
-                        placeholder="Enter salary" 
+                        placeholder="З/П в $" 
                         name='salary'
                         value={salary}
                         onChange={this.onValueChange}
                     />
                     <button type="submit"
-                        className="btn btn-outline-light">Add</button>
+                        className="btn btn-outline-light">Добавить</button>
                 </form>
             </div>        
         )

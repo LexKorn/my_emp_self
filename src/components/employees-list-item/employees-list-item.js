@@ -1,4 +1,5 @@
-import './employees-list-item.css';
+// import './employees-list-item.css';
+import './employees-list-item.scss';
 
 const EmployeesListItem = ({name, salary, onDelete, onToggleProp, increase, rise}) => {
 
@@ -15,7 +16,9 @@ const EmployeesListItem = ({name, salary, onDelete, onToggleProp, increase, rise
         <li className={className}>            
             <span className="list-group-item-label"
                 onClick={onToggleProp}
-                data-toggle="rise">{name}
+                data-toggle="rise"
+                // style={{fontSize: 24, color: 'green', textDecoration: 'underline'}}
+                >{name}
             </span>
             <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
             <div className='d-flex justify-content-center align-items-center'>
