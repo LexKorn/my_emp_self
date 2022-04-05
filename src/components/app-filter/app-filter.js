@@ -1,11 +1,11 @@
-import './app-filter.css';
+import './app-filter.sass';
 
 const AppFilter = (props) => {
 
     const buttonsData = [
         {name: 'all', label: 'Все сотрудники'},
         {name: 'rise', label: 'На повышение'},
-        {name: 'moreThan1000', label: 'З/П больше 1000$'},
+        {name: 'moreThan1000', label: 'З/П > 1000$'},
     ]
 
     const buttons = buttonsData.map(({name, label, colored}) => {

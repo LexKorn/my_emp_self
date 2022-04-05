@@ -6,7 +6,7 @@ import AppFilter from '../app-filter/app-filter';
 import EmployeesList from '../employees-list/employees-list';
 import EmployeesAddForm from '../employees-add-form/employees-add-form';
 
-import './app.css';
+import './app.sass';
 
 class App extends Component {
   constructor(props) {
@@ -108,11 +108,11 @@ class App extends Component {
             filter={filter}/>
         </div>
   
-        {/* <EmployeesList 
+        <EmployeesList 
           data={visibleDB}
           onDelete={this.deleteItem}
-          onToggleProp={this.onToggleProp}/> */}
-        {/* <EmployeesAddForm onAdd={this.addItem}/> */}
+          onToggleProp={this.onToggleProp}/>
+        <EmployeesAddForm onAdd={this.addItem}/>
       </div>
     );
   }  

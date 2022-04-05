@@ -1,6 +1,6 @@
 import EmployeesListItem from '../employees-list-item/employees-list-item';
 
-import './employees-list.css';
+import './employees-list.sass';
 
 const EmployeesList = ({data, onDelete, onToggleProp}) => {
     const elements = data.map(item => {
@@ -14,11 +14,17 @@ const EmployeesList = ({data, onDelete, onToggleProp}) => {
         )
     });
 
-    return (
-        <ul className="app-list list-group">
-            {elements}
-        </ul>        
-    )
+    if (elements.length) {
+        return (
+            <ul className="app-list list-group">
+                {elements}
+            </ul> 
+        )
+    } else {
+        return (
+            <h4>В списке нет ни одного сотрудника</h4>
+        )
+    }
 }
 
 export default EmployeesList;

@@ -1,5 +1,4 @@
-// import './employees-list-item.css';
-import './employees-list-item.scss';
+import './employees-list-item.sass';
 
 const EmployeesListItem = ({name, salary, onDelete, onToggleProp, increase, rise}) => {
 
@@ -17,7 +16,6 @@ const EmployeesListItem = ({name, salary, onDelete, onToggleProp, increase, rise
             <span className="list-group-item-label"
                 onClick={onToggleProp}
                 data-toggle="rise"
-                // style={{fontSize: 24, color: 'green', textDecoration: 'underline'}}
                 >{name}
             </span>
             <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
